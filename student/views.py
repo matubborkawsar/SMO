@@ -20,21 +20,21 @@ def create(request):
     return render(request, 'form.html', {'form': form})
 
 def update(request, pk):
-    book = get_object_or_404(Student, pk=pk)
+    student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
-        form = Student_form(request.POST, instance=book)
+        form = Student_form(request.POST, instance=student)
         if form.is_valid():
             form.save()
             messages.info(request, 'Student updated successfully!')
             return redirect('index')
     else:
-        form = Student_form(instance=book)
+        form = Student_form(instance=student)
     return render(request, 'form.html', {'form': form})
 
 def delete(request, pk):
-    book = get_object_or_404(Student, pk=pk)
+    student = get_object_or_404(Student, pk=pk)
     if request.method == 'POST':
-        book.delete()
+        student.delete()
         messages.error(request, 'Student deleted successfully!')
         return redirect('index')
-    return render(request, 'delete.html', {'book': book})
+    return render(request, 'delete.html', {'student': student})
