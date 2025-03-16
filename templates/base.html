@@ -1,0 +1,52 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>{% block title %}Student Management - Ostad{% endblock %}</title>
+        <link rel="stylesheet" href="{% static 'style.css' %}" />
+    </head>
+    <body>
+        <!-- Header-start -->
+        <header id="header" class="header">
+            <div class="logo">
+                <a href="{% url 'index' %}">SMO</a>
+            </div>
+            <ul class="main-menu">
+                <li>
+                    <a href="{% url 'index' %}">Home</a>
+                </li>
+                <li>
+                    <a href="{% url 'index' %}">All Students</a>
+                </li>
+                <li>
+                    <a href="{% url 'create' %}">Add Student</a>
+                </li>
+            </ul>
+            <a href="{% url 'create' %}" class="button">Add Student</a>
+        </header>
+        <!-- Header-end -->
+
+        <!-- Main Content -->
+        <main class="container">
+            <!-- Messages-start -->
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <div
+                    class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}"
+                >
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <!-- Messages-end -->
+            <!-- Content-start -->
+            {% block content %} {% endblock %}
+            <!-- Content-end -->
+        </main>
+        <!-- Main Content-end -->
+    </body>
+</html>
